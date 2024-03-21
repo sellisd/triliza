@@ -54,7 +54,7 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Νικητής: ' + winner;
+    status = (typeof winner == "boolean"? 'Ισοπαλία': 'Νικητής: ' + winner)
   } else {
     status = "Επόμενος παίχτης: " + (xIsNext ? 'X' : 'O')
   }
@@ -95,6 +95,9 @@ function calculateWinner(squares) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
+  }
+  if (squares.every(square => square)){
+    return true;
   }
   return null;
 }
