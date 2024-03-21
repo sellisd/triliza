@@ -14,13 +14,13 @@ export default function Game() {
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1)
   }
-  function undo(){
-    if(currentMove === 0){
+  function undo() {
+    if (currentMove === 0) {
       return;
     }
     setCurrentMove(currentMove - 1);
   }
-  function reset(){
+  function reset() {
     setHistory([Array(9).fill(null)]);
     setCurrentMove(0);
   }
@@ -31,8 +31,11 @@ export default function Game() {
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="controls">
-      <button onClick={undo}>Αναίρεση</button>
-      <button onClick={reset}>Επαναφορά</button>
+        <button onClick={undo}>Αναίρεση</button>
+        <button onClick={reset}>Επαναφορά</button>
+      </div>
+      <div className="game-info">
+        <a href="https://github.com/sellisd/triliza/">GitHub Repository</a>
       </div>
     </div>
   )
@@ -54,7 +57,7 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = (typeof winner == "boolean"? 'Ισοπαλία': 'Νικητής: ' + winner)
+    status = (typeof winner == "boolean" ? 'Ισοπαλία' : 'Νικητής: ' + winner)
   } else {
     status = "Επόμενος παίχτης: " + (xIsNext ? 'X' : 'O')
   }
@@ -96,7 +99,7 @@ function calculateWinner(squares) {
       return squares[a];
     }
   }
-  if (squares.every(square => square)){
+  if (squares.every(square => square)) {
     return true;
   }
   return null;
